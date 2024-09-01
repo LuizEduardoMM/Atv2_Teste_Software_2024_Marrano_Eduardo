@@ -47,4 +47,3 @@ mutmut html
 
 
 ### 7. Ajustar Funções e Validações
->>>>>>> 4ebf7d035332cd835b744e7eed2e13ac05f17ae6
