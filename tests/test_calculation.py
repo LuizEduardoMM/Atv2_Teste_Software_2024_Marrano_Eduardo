@@ -7,17 +7,33 @@ class CalculationTests(unittest.TestCase):
     """docstring for CalculationTests"""
 
     def setUp(self):
-        self.first_part_cpf_number = '111444777'
-        self.first_part_cnpj_number = '114447770001'
+        self.first_part_cpf_number = '131654777'
+        self.first_part_cnpj_number = '234568890123'
+        self.result_division_two_cnpj = '234568890123'
+        self.result_division_two_cpf = '131654777'
+
+    def test_first_digit_division_two(self):
+        test_number = self.result_division_two_cnpj
+        expected_result = '9'
+        result = calc.calculate_first_digit(test_number)
+        self.assertEqual(expected_result, result,
+                         "The function should return the expected result when rest_division <=2")
+
+    def test_first_digit_division_two_cpf(self):
+        test_number = self.result_division_two_cpf
+        expected_result = '9'
+        result = calc.calculate_first_digit(test_number)
+        self.assertEqual(expected_result, result,
+                         "The function should return the expected result when rest_division <=2")
 
     # TESTS FOR CPF DIGITS
     def test_cpf_calculate_first_digit_true(self):
-        correct_first_digit = '3'
+        correct_first_digit = '9'
         self.assertEqual(correct_first_digit,
                          calc.calculate_first_digit(self.first_part_cpf_number))
 
     def test_cpf_calculate_first_digit_false(self):
-        incorrect_first_digit = '6'
+        incorrect_first_digit = '0'
         self.assertNotEqual(incorrect_first_digit,
                             calc.calculate_first_digit(self.first_part_cpf_number))
 
@@ -39,7 +55,7 @@ class CalculationTests(unittest.TestCase):
 
     # TESTS FOR CNPJ DIGITS
     def test_cnpj_calculate_first_digit_true(self):
-        correct_first_digit = '6'
+        correct_first_digit = '9'
         self.assertEqual(correct_first_digit,
                          calc.calculate_first_digit(self.first_part_cnpj_number))
 
@@ -49,7 +65,7 @@ class CalculationTests(unittest.TestCase):
                             calc.calculate_first_digit(self.first_part_cnpj_number))
 
     def test_cnpj_calculate_second_digit_true(self):
-        correct_second_digit = '1'
+        correct_second_digit = '9'
         updated_cnpj_number = self.first_part_cnpj_number + \
                               calc.calculate_first_digit(
                                   self.first_part_cnpj_number)
@@ -63,4 +79,3 @@ class CalculationTests(unittest.TestCase):
                                   self.first_part_cnpj_number)
         self.assertNotEqual(correct_second_digit,
                             calc.calculate_second_digit(updated_cnpj_number))
-
